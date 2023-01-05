@@ -1,0 +1,2 @@
+## notes
+EMAIL -> lowercase
