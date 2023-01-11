@@ -1,6 +1,7 @@
-import type {Db} from "mongodb";
+import type { Db } from "mongodb";
 
-async function validateEmail(email:string, db:Db) {
+// will validate the payload email.
+export default async function validateEmail(email: string, db: Db) {
   try {
     const userCollection = db.collection("users");
     const y = await userCollection.findOne({
@@ -16,5 +17,3 @@ async function validateEmail(email:string, db:Db) {
     throw err;
   }
 }
-
-module.exports = validateEmail;

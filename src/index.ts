@@ -1,21 +1,14 @@
 // import express and run .env on node.
-import express from 'express';
+import express from "express";
 import db from "./mongodb/db";
+import createAccount from "./routes/createaccount";
+import generatenewtoken from "./routes/generatenewtoken";
+require("dotenv").config();
 const app = express();
 const cors = require("cors");
-require("dotenv").config();
-
-// port -> 4000
 const port = process.env.port;
-// use json middleware
 app.use(express.json());
 app.use(cors({ allowedHeaders: "*" }));
-// requires routes
-const createAccount = require("./routes/createaccount");
-const generatenewtoken = require("./routes/generatenewtoken");
-
-// import db
-
 
 db().then(async (database) => {
   app.post("/createaccount", createAccount(database));

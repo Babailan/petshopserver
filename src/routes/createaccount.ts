@@ -1,12 +1,12 @@
 const generateToken = require("../jwt/generatetoken");
-const validateEmail = require("../validation/emailvalidation");
-import { randomBytes } from 'crypto';
-import hash from '../hasher/hash';
-import type {Db} from 'mongodb';
-import { Request, Response } from 'express';
+import validateEmail from "../validation/emailvalidation";
+import { randomBytes } from "crypto";
+import hash from "../hasher/hash";
+import type { Db } from "mongodb";
+import { Request, Response } from "express";
 
-export default function(db:Db) {
-  return async (req:Request, res:Response) => {
+export default function (db: Db) {
+  return async (req: Request, res: Response) => {
     try {
       const key = process.env.KEY as string;
       const email = req.body.email.toLowerCase();
@@ -15,7 +15,6 @@ export default function(db:Db) {
       const password = hash(key, req.body.password);
       const userCollection = db.collection("users");
       const refreshtoken = randomBytes(32).toString("base64");
-
       const result = await userCollection.insertOne({
         email,
         password,
